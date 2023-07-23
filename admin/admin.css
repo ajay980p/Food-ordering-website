@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    border: 1px solid black;
+    padding: 3%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.tbl-class {
+    width: 100%;
+}
+
+.tbl-row {
+    padding: 0 20px;
+    
+}
+
+.tbl-data {
+    
+    padding: 0 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* CSS for menu */
+.menu {
+    text-align: center;
+}
+
+.menu ul {
+    list-style-type: none;
+}
+
+.menu ul li {
+    display: inline;
+    padding: 1%;
+}
+
+.menu ul li:hover {
+    color: #3b181b;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff4757;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+.success {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+/* CSS for main content */
+.main-content {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    flex-grow: 1; 
+    border: 1px solid black; 
+    margin: 20px;
+    background-color: rgba(128, 128, 128, 0.388);
+}
+
+.col-4 {
+    background-color: #ffff;
+}
+
+.col-4Div {
+    display: flex;
+    justify-content: center;
+}
+
+.col-4 {
+    padding: 20px 80px;
+    border: 1px solid black;
+    margin: 20px;
+}
+
+
+
+/* CSS for Footer */
+
+.footer {
+    background-color: #ff4757;
+    color: #ffff;
+    padding: 10px;
+    text-align: center;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
