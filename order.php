@@ -3,6 +3,7 @@ include 'partials_front/menu.php';
 
 if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
     $food_id = $_GET['food-id'];
+    $rest_id = $_GET['rest_id'];
 
     $sql = "SELECT * FROM tbl_food WHERE id=$food_id";
     $run = mysqli_query($conn, $sql);
@@ -86,17 +87,22 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
         $price = $_POST['price'];
         $qty = $_POST['qty'];
 
+
         $total = $price * $qty; // Total Amount
     
         $order_date = date("Y-m-d h:i:sa");
+        $rest_id = $_GET['rest_id'];
         $status = "ordered"; // Ordered, OnDelivery, Delivered, Cancelled
         $customer_name = $_POST['full_name'];
         $customer_contact = $_POST['contact'];
         $customer_email = $_POST['email'];
         $customer_address = $_POST['address'];
+        $cust_id = $_SESSION['cust_id'];
 
         // After that we have to save the order into the database
         $sql2 = "INSERT INTO tbl_order SET
+            cust_id = $cust_id,
+            restaurant_id = $rest_id,
             food = '$food',
             price = $price,
             qty = $qty,

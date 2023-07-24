@@ -21,6 +21,10 @@ if (isset($_SESSION['order'])) {
     unset($_SESSION['order']);
 }
 
+if ($_SESSION['cust-login-success-msg']) {
+    echo $_SESSION['cust-login-success-msg'];
+}
+
 ?>
 
 <!-- CAtegories Section Starts Here -->
@@ -89,6 +93,7 @@ if (isset($_SESSION['order'])) {
             $price = $rows['price'];
             $description = $rows['description'];
             $image_name = $rows['image_name'];
+            $restaurant_id = $rows['Restaurant_ID'];
             ?>
 
             <div class="food-menu-box">
@@ -104,13 +109,17 @@ if (isset($_SESSION['order'])) {
                     <p class="food-price">
                         <?php echo $price; ?>
                     </p>
+                    <p class="food-price">
+                        <?php echo $restaurant_id; ?>
+                    </p>
                     <p class="food-detail">
                         <?php echo $description; ?>
                     </p>
                     <br>
 
-                    <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>" class="btn btn-primary">Order
-                        Now</a>
+                    <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>&rest_id=<?php echo $restaurant_id ?>"
+                        class="btn btn-primary">Order Now</a>
+
                 </div>
             </div>
 

@@ -28,7 +28,7 @@ include 'partials/menu.php'
             <?php
 
             // Fetching restaurant id through SESSION
-            $restaurant_id = 92703;
+            $restaurant_id = $_SESSION['restaurant_id'];
 
             $sql = "SELECT * FROM tbl_order WHERE restaurant_id=$restaurant_id";
             $run = mysqli_query($conn, $sql);

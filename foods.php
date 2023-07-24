@@ -1,5 +1,6 @@
 <?php
 include 'partials_front/menu.php';
+
 ?>
 
 <!-- fOOD sEARCH Section Starts Here -->
@@ -19,6 +20,9 @@ include 'partials_front/menu.php';
 <section class="food-menu">
     <div class="container">
         <h2 class="text-center">Food Menu</h2>
+        <div>
+            <?php echo $_SESSION['cust_id']; ?>
+        </div>
 
         <?php
         // Getting food from the database usig SQL Query
@@ -32,6 +36,7 @@ include 'partials_front/menu.php';
             $price = $rows['price'];
             $description = $rows['description'];
             $image_name = $rows['image_name'];
+            $rest_id = $rows['Restaurant_ID'];
             ?>
 
             <div class="food-menu-box">
@@ -47,12 +52,15 @@ include 'partials_front/menu.php';
                     <p class="food-price">
                         <?php echo $price; ?>
                     </p>
+                    <p class="food-price">
+                        <?php echo $rest_id; ?>
+                    </p>
                     <p class="food-detail">
                         <?php echo $description; ?>
                     </p>
                     <br>
 
-                    <a href="<?php echo SITEURL ?>order.php?order-id=<?php echo $id ?>" class="btn btn-primary">Order
+                    <a href="<?php echo SITEURL ?>order.php?rest-id=<?php echo $rest_id ?>" class="btn btn-primary">Order
                         Now</a>
                 </div>
             </div>

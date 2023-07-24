@@ -94,9 +94,9 @@ if (isset($_POST['submit'])) {
         $cust_id = $_SESSION['cust_id'];
 
         // Login Success
-        $_SESSION = "Login Successfully";
+        $_SESSION['cust-login-success-msg'] = "<div class='success'>Login Successfully</div>";
 
-        // $_SESSION['user'] = $username;
+        $_SESSION['cust-login'] = $username;
 
         header('Location: ' . SITEURL . 'index.php?cust_id=' . $cust_id);
 

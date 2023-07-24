@@ -2,6 +2,14 @@
 include './admin/db/connect.php';
 ?>
 
+<?php
+// Adding Authorization
+if (!isset($_SESSION['cust-login'])) {
+    header('location:' . SITEURL . 'user_login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +48,9 @@ include './admin/db/connect.php';
                     </li>
                     <li>
                         <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="partials_front/user-logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

@@ -70,14 +70,13 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($run) == 1) {
 
         $rows = mysqli_fetch_assoc($run);
-        echo "Succeeded";
 
         // Assigning restaurant id to get the result and send it to the other page
-        $_SESSION['restaurant_id'] = $rows['Restaurant_ID'];
+        $restaurant_id = $rows['Restaurant_ID'];
+        $_SESSION['restaurant_id'] = $restaurant_id;
 
         $_SESSION['login'] = "<div class='success'>Login Successful</div>";
         $_SESSION['user'] = $username;
-
 
         header('Location: ' . SITEURL . 'admin/index.php?restaurant_id=' . $restaurant_id);
 
