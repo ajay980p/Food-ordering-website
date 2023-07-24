@@ -1,16 +1,16 @@
-<?php 
-    include('partials/menu.php');
+<?php
+include('partials/menu.php');
 ?>
 
 <div class="main-content">
     <div class="wrapper">
         <h1>Add Admin</h1>
 
-        <?php 
-            if(isset($_SESSION['add'])) {
-                echo $_SESSION['add'];
-                unset($_SESSION['add']);    // Removing the session msg
-            }
+        <?php
+        if (isset($_SESSION['add'])) {
+            echo $_SESSION['add'];
+            unset($_SESSION['add']); // Removing the session msg
+        }
         ?>
 
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
@@ -57,35 +57,39 @@
 
 <?php include('partials/footer.php') ?>
 
-<?php 
+<?php
 
-    if(isset($_POST['submit'])) {
-        
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+if (isset($_POST['submit'])) {
 
-        echo $full_name;
-        echo $username;
-        echo $password;
+    $full_name = $_POST['full_name'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-        $sql = "insert into tbl_admin(full_name, username, password) values('$full_name', '$username', '$password')";
+    // Generating random id for the restaurant
+    $minValue = 10000;
+    $maxValue = 99999;
+    $restaurant_id = random_int($minValue, $maxValue); // Random id generated for the restaurant
 
-        $run = mysqli_query($conn, $sql);
+    echo $full_name;
+    echo $username;
+    echo $password;
 
-        if($run) {
-            $_SESSION['add'] = "Admin added Successfully";
+    $sql = "insert into tbl_admin(Restaurant_ID, full_name, username, password) values($restaurant_id, '$full_name', '$username', '$password')";
 
-            // Redirecting page to Manage Admin
-            header("location:".SITEURL.'admin/manage-admin.php');
+    $run = mysqli_query($conn, $sql);
+
+    if ($run) {
+        $_SESSION['add'] = "Admin added Successfully";
+
+        // Redirecting page to Manage Admin
+        header("location:" . SITEURL . 'admin/manage-admin.php');
 
 
-        }
-        else {
-            $_SESSION['add'] = "Failed to add Admin";
+    } else {
+        $_SESSION['add'] = "Failed to add Admin";
 
-            // Redirecting page to Manage Admin
-            header("location:".SITEURL.'admin/add-admin.php');
-        }
+        // Redirecting page to Manage Admin
+        header("location:" . SITEURL . 'admin/add-admin.php');
     }
+}
 ?>

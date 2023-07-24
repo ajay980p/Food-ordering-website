@@ -1,5 +1,6 @@
 <?php
 include 'partials/menu.php';
+
 ?>
 
 <div class="main-content">
@@ -11,10 +12,10 @@ include 'partials/menu.php';
         </br>
 
         <?php
-                if(isset($_SESSION['login'])) {
-                    echo $_SESSION['login'];
-                    unset($_SESSION['login']);
-                }
+        if (isset($_SESSION['login'])) {
+            echo $_SESSION['login'];
+            unset($_SESSION['login']);
+        }
         ?>
 
         </br>
@@ -48,8 +49,6 @@ include 'partials/menu.php';
         </div>
         <!-- <div class="clearFix"></div> -->
     </div>
+</div>
 
-    <?php
-include 'partials/footer.php'
-
-?>
+<?php include 'partials/footer.php' ?>

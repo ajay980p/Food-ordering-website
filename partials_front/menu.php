@@ -1,5 +1,5 @@
 <?php
-    include './admin/db/connect.php';
+include './admin/db/connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,8 @@
         <div class="container">
             <div class="logo">
                 <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                    <!-- <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive"> -->
+                    <h3>Eat&FeedFood</h3>
                 </a>
             </div>
 

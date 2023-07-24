@@ -1,6 +1,13 @@
-<?php 
-    include('db/connect.php');
-    include('login-check.php');
+<?php
+include('db/connect.php');
+include('login-check.php');
+?>
+
+<?php
+// To make Restaurant id Global
+
+echo $_SESSION['restaurant_id'];
+
 ?>
 
 <!DOCTYPE html>

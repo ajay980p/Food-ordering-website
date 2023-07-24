@@ -20,11 +20,10 @@ include 'partials/menu.php';
         <br>
 
         <?php
-            if(isset($_SESSION['upload']))
-            {
-                echo $_SESSION['upload'];
-                unset($_SESSION['upload']);
-            }
+        if (isset($_SESSION['upload'])) {
+            echo $_SESSION['upload'];
+            unset($_SESSION['upload']);
+        }
         ?>
 
         <form method="POST" action="" enctype="multipart/form-data">
@@ -66,35 +65,35 @@ include 'partials/menu.php';
                         <select name="category">
 
                             <?php
-                                // Displaying the Categories through the database
+                            // Displaying the Categories through the database
+                            
+                            $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
+                            $run = mysqli_query($conn, $sql);
 
-                                $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
-                                $run = mysqli_query($conn, $sql);
+                            $count = mysqli_num_rows($run);
 
-                                $count = mysqli_num_rows($run);
+                            if ($count > 0) {
+                                // We have Categories exist
+                            
+                                while ($row = mysqli_fetch_assoc($run)) {
+                                    // Get the value from the database
+                            
+                                    $id = $row['id'];
+                                    $title = $row['title'];
+                                    ?>
 
-                                if ($count > 0) {
-                                    // We have Categories exist
+                                    <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
 
-                                    while ($row = mysqli_fetch_assoc($run)) {
-                                        // Get the value from the database
-
-                                        $id = $row['id'];
-                                        $title = $row['title'];
-                            ?>
-
-                            <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
-
-                            <?php
-                                    }
-                                } else {
-                                    // We do not have categories
-                            ?>
-
-                            <option value="0">No Categories</option>
-
-                            <?php
+                                    <?php
                                 }
+                            } else {
+                                // We do not have categories
+                                ?>
+
+                                <option value="0">No Categories</option>
+
+                            <?php
+                            }
                             ?>
 
                         </select>
@@ -129,74 +128,73 @@ include 'partials/menu.php';
 
         <?php
         // Check whether button is clicked or not
-
-        if(isset($_POST['submit']))
-        {
+        
+        if (isset($_POST['submit'])) {
             // Add the food in Database
             // 1. Get the data from the form and insert into the database and then upload the image into the database.
             // 2. After that we will redirect to the manage food page.
-
+        
             $title = $_POST['title'];
             $description = $_POST['description'];
             $price = $_POST['price'];
             $category = $_POST['category'];
             $featured = "";
-            $active = ""; 
+            $active = "";
             $image_name = "";
 
             // Featured Started
-            if(isset($_POST['featured'])) {
+            if (isset($_POST['featured'])) {
                 $featured = $_POST['featured'];
-            }
-            else {
+            } else {
                 $featured = "No";
             }
-            
+
             // Active started
-            if(isset($_POST['active'])) {
+            if (isset($_POST['active'])) {
                 $active = $_POST['active'];
-            }
-            else {
+            } else {
                 $active = "No";
             }
 
             // File is Started
-            if(isset($_FILES['image']['name'])) {
-                
+            if (isset($_FILES['image']['name'])) {
+
                 $image_name = $_FILES['image']['name'];
 
-                if($image_name != "") {
+                if ($image_name != "") {
                     // Image is selected
-
+        
                     // To get the extension of the file
                     $ext = end(explode('.', $image_name));
                     // explode will do to divide the full name into parts
                     // So using end will get the last part of the word
-
+        
                     $image_name = "Food-name" . rand(0, 9999) . "." . $ext;
                     // New image name will be like "Food-name-657.jpg";
-
+        
                     $src = $_FILES['image']['tmp_name'];
 
                     // Destination path for the image to be updated
-                    $dst = "C://xampp//htdocs//food//images//food//".$image_name;
+                    $dst = "C://xampp//htdocs//food//images//food//" . $image_name;
 
                     $upload = move_uploaded_file($src, $dst);
 
-                    if($upload == false) {
+                    if ($upload == false) {
                         // Failed to upload
                         $_SESSION['upload'] = "<div class='error'>Failed to upload the image</div>";
-                        header('location:'.SITEURL.'admin/add-food.php');
+                        header('location:' . SITEURL . 'admin/add-food.php');
                     }
-                    
+
                 }
-            }
-            else {
+            } else {
                 $image_name = "";
             }
 
+
+
             // To Save the data create a SQL query
             $sql2 = "INSERT INTO tbl_food SET
+                Restaurant_id = ,
                 title= '$title',
                 description = '$description',
                 price = $price,
@@ -208,15 +206,14 @@ include 'partials/menu.php';
             // Execute the query
             $run2 = mysqli_query($conn, $sql2);
 
-            if($run2 == true) {
+            if ($run2 == true) {
                 // Data inserted successfully
                 $_SESSION['add'] = "<div class='success'>Food added Successfully...</div>";
-                header('location:'.SITEURL.'admin/food.php');
-            }
-            else {
+                header('location:' . SITEURL . 'admin/food.php');
+            } else {
                 // Failed to insert the data
                 $_SESSION['add'] = "<div class='success'>Failed to add Food...</div>";
-                header('location:'.SITEURL.'admin/food.php');
+                header('location:' . SITEURL . 'admin/food.php');
             }
         }
         ?>

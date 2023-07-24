@@ -22,17 +22,17 @@ include('db/connect.php');
             <br>
 
             <?php
-                if(isset($_SESSION['login'])) {
-                    echo $_SESSION['login'];
-                    unset($_SESSION['login']);
-                    echo "<br><br>";
-                }
-                
-                if(isset($_SESSION['no-login-message'])) {
-                    echo $_SESSION['no-login-message'];
-                    unset($_SESSION['no-login-message']);
-                    echo "<br><br>";
-                }
+            if (isset($_SESSION['login'])) {
+                echo $_SESSION['login'];
+                unset($_SESSION['login']);
+                echo "<br><br>";
+            }
+
+            if (isset($_SESSION['no-login-message'])) {
+                echo $_SESSION['no-login-message'];
+                unset($_SESSION['no-login-message']);
+                echo "<br><br>";
+            }
             ?>
 
             <label>Username</label>
@@ -57,7 +57,7 @@ include('db/connect.php');
 
 <?php
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -66,19 +66,25 @@ if(isset($_POST['submit'])) {
 
     $run = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($run) == 1) {
+    // To check how many ros are available into the table tbl_admin (For restaurant verification purpose)
+    if (mysqli_num_rows($run) == 1) {
+
+        $rows = mysqli_fetch_assoc($run);
         echo "Succeeded";
+
+        // Assigning restaurant id to get the result and send it to the other page
+        $_SESSION['restaurant_id'] = $rows['Restaurant_ID'];
 
         $_SESSION['login'] = "<div class='success'>Login Successful</div>";
         $_SESSION['user'] = $username;
 
-        header('location:'.SITEURL.'admin/');
 
-    }
-    else {
+        header('Location: ' . SITEURL . 'admin/index.php?restaurant_id=' . $restaurant_id);
+
+    } else {
         $_SESSION['login'] = "<div class='error'>Username or Password did not matched</div>";
 
-        header('location:'.SITEURL.'admin/login.php');
+        header('location:' . SITEURL . 'admin/login.php');
     }
 }
 
