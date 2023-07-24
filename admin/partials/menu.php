@@ -3,13 +3,6 @@ include('db/connect.php');
 include('login-check.php');
 ?>
 
-<?php
-// To make Restaurant id Global
-
-echo $_SESSION['restaurant_id'];
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +20,8 @@ echo $_SESSION['restaurant_id'];
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg" style="background:#FFA500">
+        <div class="container-fluid" style="font-weight: bold;">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,26 +30,12 @@ echo $_SESSION['restaurant_id'];
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                    <a class="nav-link" href="#">Admin</a>
-                    <a class="nav-link" href="#">Category</a>
-                    <a class="nav-link disabled">Food</a>
-                    <a class="nav-link disabled">Order</a>
-                    <a class="nav-link disabled">Logout</a>
+                    <a class="nav-link" href="manage-admin.php">Admin</a>
+                    <a class="nav-link" href="category.php">Category</a>
+                    <a class="nav-link" href=" food.php">Food</a>
+                    <a class="nav-link" href="order.php">Order</a>
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
     </nav>
-
-
-    <div class="menu text-center">
-        <div class="wrapper">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="manage-admin.php">Admin</a></li>
-                <li><a href="category.php">Category</a></li>
-                <li><a href="food.php">Food</a></li>
-                <li><a href="order.php">Order</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
-        </div>
-    </div>

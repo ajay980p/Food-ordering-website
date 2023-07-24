@@ -1,6 +1,5 @@
 <?php
 include 'partials/menu.php';
-
 ?>
 
 <div class="main-content">

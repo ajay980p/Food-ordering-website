@@ -2,45 +2,56 @@
 include 'partials/menu.php';
 ?>
 
-<div class="main-content">
+<div class="container" style="min-height: 80vh; width:95%; margin: 2% auto; float:top;">
 
-    <div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-center">Add Food</h3>
+            </div>
+        </div>
+    </div>
 
-        <strong style="display: block; text-align: center;">Add Food</strong>
+    <br>
 
-        <br>
-        <br>
+    <?php
+    if (isset($_SESSION['add'])) {
+        echo $_SESSION['add'];
+        unset($_SESSION['add']);
+    }
 
-        <?php
-        if (isset($_SESSION['add'])) {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
-        }
+    if (isset($_SESSION['add'])) {
+        echo $_SESSION['add'];
+        unset($_SESSION['add']);
+    }
 
-        if (isset($_SESSION['add'])) {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
-        }
+    ?>
 
-        ?>
+    <br>
 
-        <button class="add-admin"
-            style=" padding: 10px; background-color: #ff4757; border: none; border-radius: 25px; cursor: pointer; color: #ffff; "><a
-                href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary"
-                style="text-decoration: none; color: white;">Add
-                Food</a></button>
-        <br>
-        <br>
-        <table class="tbl-class">
-            <tr class="tbl-row">
-                <td class="tbl-data">S.No</td>
-                <td class="tbl-data">Title</td>
-                <td class="tbl-data">Price</td>
-                <td class="tbl-data">Image</td>
-                <td class="tbl-data">Featured</td>
-                <td class="tbl-data">Active</td>
-                <td class="tbl-data">Actions</td>
-            </tr>
+    <button class="add-admin"
+        style=" padding: 10px; background-color: #ff4757; border: none; border-radius: 25px; cursor: pointer; color: #ffff; "><a
+            href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary"
+            style="text-decoration: none; color: white;">Add
+            Food</a>
+    </button>
+
+    <br>
+    <br>
+
+    <div class="table-responsive mx-auto">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td class="col">S.No</td>
+                    <td class="col">Title</td>
+                    <td class="col">Price</td>
+                    <td class="col">Image</td>
+                    <td class="col">Featured</td>
+                    <td class="col">Active</td>
+                    <td class="col">Actions</td>
+                </tr>
+            </thead>
 
             <?php
 
@@ -51,32 +62,48 @@ include 'partials/menu.php';
 
             $count = 1;
             while ($rows = mysqli_fetch_assoc($run)) {
-                echo "<tr>";
 
-                echo "<td class='tbl-data'>$count</td>";
-                echo "<td class='tbl-data'>" . $rows['title'] . "</td>";
-                echo "<td class='tbl-data'>" . $rows['price'] . "</td>";
+                ?>
 
-                echo "<td class='tbl-data'>
-                        <img src='..//images//food//" . $rows['image_name'] . "' alt='Food Image' width='100px' height='100px' />
-                    </td>";
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <?php echo $count ?>
+                        </th>
+                        <td>
+                            <?php echo $rows['title'] ?>
+                        </td>
+                        <td>
+                            <?php echo $rows['price'] ?>
+                        </td>
+                        <td>
+                            <img src="../images/food/<?php echo $rows['image_name']; ?>" alt="Food Image" width="100px"
+                                height="100px" />
+                        </td>
 
-                echo "<td class='tbl-data'>" . $rows['featured'] . "</td>";
-                echo "<td class='tbl-data'>" . $rows['active'] . "</td>";
-                echo "<td class='tbl-data'>
-                <a>Update</a>
-                <a>Delete</a>
-            </td>";
+                        <td>
+                            <?php echo $rows['featured'] ?>
+                        </td>
+                        <td>
+                            <?php echo $rows['active'] ?>
+                        </td>
+                        <td>
+                            <a>Update</a>
+                            <a>Delete</a>
+                        </td>
+                    </tr>
 
-                echo "</tr>";
+                </tbody>
 
+                <?php
                 $count++;
             }
             ?>
-
         </table>
     </div>
 
-    <?php
-    include 'partials/footer.php';
-    ?>
+</div>
+
+<?php
+include 'partials/footer.php';
+?>
