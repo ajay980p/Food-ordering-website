@@ -26,7 +26,11 @@ include 'partials/menu.php'
             </tr>
 
             <?php
-            $sql = "SELECT * FROM tbl_order";
+
+            // Fetching restaurant id through SESSION
+            $restaurant_id = 92703;
+
+            $sql = "SELECT * FROM tbl_order WHERE restaurant_id=$restaurant_id";
             $run = mysqli_query($conn, $sql);
 
             $count = mysqli_num_rows($run);
@@ -44,7 +48,6 @@ include 'partials/menu.php'
                     $cust_contact = $rows['customer_contact'];
                     $cust_email = $rows['customer_email'];
                     $cust_address = $rows['customer_adress'];
-
                     ?>
 
                     <tr>

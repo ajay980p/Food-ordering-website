@@ -14,7 +14,7 @@ $port = 4306;
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 if ($conn) {
-    // echo "Connected to the db";
+    echo "Connected to the db";
 } else {
     echo "Database not Connected";
 }

@@ -190,18 +190,20 @@ include 'partials/menu.php';
                 $image_name = "";
             }
 
-
+            // Fetching restaurant id through SESSION
+            $restaurant_id = $_SESSION['restaurant_id'];
 
             // To Save the data create a SQL query
             $sql2 = "INSERT INTO tbl_food SET
-                Restaurant_id = ,
+                Restaurant_id = $restaurant_id,
                 title= '$title',
                 description = '$description',
                 price = $price,
                 image_name = '$image_name',
                 category_id = $category,
                 featured = '$featured',
-                active = '$active'";
+                active = '$active'
+                ";
 
             // Execute the query
             $run2 = mysqli_query($conn, $sql2);

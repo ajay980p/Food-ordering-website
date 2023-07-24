@@ -43,7 +43,10 @@ include 'partials/menu.php';
             </tr>
 
             <?php
-            $sql = "SELECT * FROM tbl_food";
+
+            $restaurant_id = $_SESSION['restaurant_id'];
+
+            $sql = "SELECT * FROM tbl_food WHERE restaurant_id=$restaurant_id";
             $run = mysqli_query($conn, $sql);
 
             $count = 1;
@@ -57,7 +60,7 @@ include 'partials/menu.php';
                 echo "<td class='tbl-data'>
                         <img src='..//images//food//" . $rows['image_name'] . "' alt='Food Image' width='100px' height='100px' />
                     </td>";
-                    
+
                 echo "<td class='tbl-data'>" . $rows['featured'] . "</td>";
                 echo "<td class='tbl-data'>" . $rows['active'] . "</td>";
                 echo "<td class='tbl-data'>
