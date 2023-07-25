@@ -27,9 +27,18 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
 
 ?>
 
-<!-- fOOD SEARCH Section Starts Here -->
 
-<form class="mx-auto pt-4 bg-light" style="height: 80vh;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<?php
+if (isset($_SESSION['order_status'])) {
+    echo $_SESSION['order_status'];
+    unset($_SESSION['order_status']);
+}
+?>
+
+
+
+<!-- fOOD SEARCH Section Starts Here -->
+<form class="mx-auto pt-4 bg-light" style="height: 80vh;" action="" method="POST">
 
     <div style="display: flex;" class="container">
 
@@ -49,20 +58,19 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
                         <h3>
                             <?php echo $title ?>
                         </h3>
-                        <input name='food' type='hidden' value="<?php echo $title ?>" />
+                        <input name='food_name' type='hidden' value="<?php echo $title ?>" />
 
                         <p class="food-price">
                             Price :
                             <?php echo '$' . $price ?>
                         </p>
+                        <input name='price' type='hidden' value="<?php echo $price ?>" />
 
                         <p class="food-price">
                             <?php
                             echo 'Restaurant-id : ' . $rest_id;
                             ?>
                         </p>
-
-                        <input name='price' type='hidden' value="<?php echo $price ?>" />
 
                         <div class="form-group" style="width: 100px;">
                             <label for="qty" style="font-weight: bold;">Quantity</label>
@@ -95,7 +103,7 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
 
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">Email Address</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
                         placeholder="E.g. example@gmail.com" name="email">
                 </div>
 
@@ -118,15 +126,14 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
 <?php
 if (isset($_POST['submit'])) {
     // Get all the Details from the form
-    $food = $_POST['food'];
+    $food_name = $_POST['food_name'];
     $price = $_POST['price'];
     $qty = $_POST['qty'];
-
 
     $total = $price * $qty; // Total Amount
 
     $order_date = date("Y-m-d h:i:sa");
-    $rest_id = $_GET['rest_id'];
+    // $rest_id = $_GET['rest_id'];
     $status = "ordered"; // Ordered, OnDelivery, Delivered, Cancelled
     $customer_name = $_POST['full_name'];
     $customer_contact = $_POST['contact'];
@@ -138,7 +145,7 @@ if (isset($_POST['submit'])) {
     $sql2 = "INSERT INTO tbl_order SET
                 cust_id = $cust_id,
                 restaurant_id = $rest_id,
-                food = '$food',
+                food = '$food_name',
                 price = $price,
                 qty = $qty,
                 total = $total,
@@ -155,14 +162,14 @@ if (isset($_POST['submit'])) {
 
     if ($run2 == true) {
         // Query executed
-        $_SESSION['order'] = "<div class='success'>Food Order Successfully</div>";
-        header('location:' . SITEURL);
-        exit; // Exit to prevent further execution
+        $_SESSION['order_status'] = "<div class='success' align='center'>Food Order Successful</div>";
+        // header('location:' . SITEURL . 'index.php');
+        // exit; // Exit to prevent further execution
     } else {
         // Query failed
-        $_SESSION['order'] = "<div class='error'>Failed to Order Food</div>";
-        header('location:' . SITEURL);
-        exit; // Exit to prevent further execution
+        $_SESSION['order_status'] = "<div class='error' align='center'>Order Failed...</div>";
+        // header('location:' . SITEURL);
+        // exit; // Exit to prevent further execution
     }
 }
 ?>

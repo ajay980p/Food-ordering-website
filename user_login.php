@@ -53,6 +53,12 @@ include './admin/db/connect.php';
 
                     <br>
 
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 me-2">Don't have an account? <a class='text-primary' style="cursor: pointer;"
+                                href="cust-signup.php">Create new</a></p>
+                        <!-- <button type="button" class="btn btn-outline-success">Create new</button> -->
+                    </div>
+
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
 
