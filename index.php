@@ -2,27 +2,15 @@
 include 'partials_front/menu.php';
 ?>
 
-<!-- fOOD SEARCH Section Starts Here -->
-<section class="food-search text-center">
-    <div class="container">
-
-        <form action="<?php echo SITEURL; ?>food-search.php" method="POST">
-            <input type="search" name="search" placeholder="Search for Food.." required>
-            <input type="submit" name="submit" value="Search" class="btn btn-primary">
-        </form>
-
-    </div>
-</section>
-<!-- fOOD SEARCH Section Ends Here -->
-
 <?php
 if (isset($_SESSION['order'])) {
     echo $_SESSION['order'];
     unset($_SESSION['order']);
 }
 
-if ($_SESSION['cust-login-success-msg']) {
+if (isset($_SESSION['cust-login-success-msg'])) {
     echo $_SESSION['cust-login-success-msg'];
+    unset($_SESSION['cust-login-success-msg']);
 }
 
 ?>
@@ -76,64 +64,68 @@ if ($_SESSION['cust-login-success-msg']) {
 </section>
 <!-- Categories Section Ends Here -->
 
+
+
 <!-- fOOD MENU Section Starts Here -->
 <section class="food-menu">
     <div class="container">
+
         <h2 class="text-center">Food Menu</h2>
 
-        <?php
-        // Getting food from the database using SQL Query
-        
-        $sql1 = "SELECT * FROM tbl_food WHERE featured='Yes' and active='Yes' LIMIT 6";
-        $run = mysqli_query($conn, $sql1);
-
-        while ($rows = mysqli_fetch_assoc($run)) {
-            $id = $rows['id'];
-            $title = $rows['title'];
-            $price = $rows['price'];
-            $description = $rows['description'];
-            $image_name = $rows['image_name'];
-            $restaurant_id = $rows['Restaurant_ID'];
-            ?>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="./images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>"
-                        class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>
-                        <?php echo $title; ?>
-                    </h4>
-                    <p class="food-price">
-                        <?php echo $price; ?>
-                    </p>
-                    <p class="food-price">
-                        <?php echo $restaurant_id; ?>
-                    </p>
-                    <p class="food-detail">
-                        <?php echo $description; ?>
-                    </p>
-                    <br>
-
-                    <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>&rest_id=<?php echo $restaurant_id ?>"
-                        class="btn btn-primary">Order Now</a>
-
-                </div>
-            </div>
-
+        <div style="display:flex; flex-wrap: wrap;" class="">
             <?php
-        }
-        ?>
+            // Getting food from the database using SQL Query
+            
+            $sql1 = "SELECT * FROM tbl_food WHERE featured='Yes' and active='Yes' LIMIT 6";
+            $run = mysqli_query($conn, $sql1);
+
+            while ($rows = mysqli_fetch_assoc($run)) {
+                $id = $rows['id'];
+                $title = $rows['title'];
+                $price = $rows['price'];
+                $description = $rows['description'];
+                $image_name = $rows['image_name'];
+                $restaurant_id = $rows['Restaurant_ID'];
+                ?>
+
+                <div style="margin: 0 auto;">
+                    <div style="display: flex; width: 500px; height:200px; margin: 30px; border-radius: 15px; gap: 20px; background-color: #ffff; padding-top: 10px;"
+                        class="container-fluid; ">
+                        <div class=" mt-2">
+                            <img src="./images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>"
+                                class="img-responsive img-curve" style="width: 150px; height: 150px; margin-left: 20px;">
+                        </div>
+
+                        <div class="mt-2">
+                            <h4>
+                                <?php echo $title; ?>
+                            </h4>
+                            <p class="food-price">
+                                <?php echo '$' . $price; ?>
+                            </p>
+                            <p class="food-detail">
+                                <?php echo $description; ?>
+                            </p>
+
+                            <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>&rest_id=<?php echo $restaurant_id ?>"
+                                class="btn btn-primary" style="padding: 4px 10px;">Order Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+            }
+            ?>
+        </div>
 
         <div class="clearfix"></div>
 
     </div>
 
-    <!-- <p class="text-center">
-        <a href="#">See All Foods</a>
-    </p> -->
+    <p class="text-center">
+        <a href="foods.php">See All Foods</a>
+    </p>
 
 </section>
 

@@ -116,7 +116,7 @@ fieldset{
 /* CSS for Food SEarch Section */
 
 .food-search{
-    background-image: url(../images/bg.jpg);
+    /* background-image: url(../images/bg.jpg); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -150,7 +150,7 @@ fieldset{
     padding: 4% 0;
 }
 .food-menu-box{
-    width: 43%;
+    width: 50%;
     margin: 1%;
     padding: 2%;
     float: left;
@@ -256,6 +256,7 @@ fieldset{
         padding: 5%;
         margin-bottom: 5%;
     }
+    
     .social{
         padding: 5% 0;
     }
