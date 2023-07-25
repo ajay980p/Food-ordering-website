@@ -27,16 +27,6 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
 
 ?>
 
-
-<?php
-if (isset($_SESSION['order_status'])) {
-    echo $_SESSION['order_status'];
-    unset($_SESSION['order_status']);
-}
-?>
-
-
-
 <!-- fOOD SEARCH Section Starts Here -->
 <form class="mx-auto pt-4 bg-light" style="height: 80vh;" action="" method="POST">
 
@@ -162,12 +152,19 @@ if (isset($_POST['submit'])) {
 
     if ($run2 == true) {
         // Query executed
-        $_SESSION['order_status'] = "<div class='success' align='center'>Food Order Successful</div>";
+        $_SESSION['order'] = "<div class='success' align='center'>Food Order Successful</div>";
         // header('location:' . SITEURL . 'index.php');
+        ?>
+
+        <script>
+            window.location.href = "http://localhost/food/index.php";
+        </script>
+
+        <?php
         // exit; // Exit to prevent further execution
     } else {
         // Query failed
-        $_SESSION['order_status'] = "<div class='error' align='center'>Order Failed...</div>";
+        $_SESSION['order'] = "<div class='error' align='center'>Order Failed...</div>";
         // header('location:' . SITEURL);
         // exit; // Exit to prevent further execution
     }

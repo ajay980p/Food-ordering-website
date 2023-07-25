@@ -104,6 +104,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['login'] = "<div class='error'>Username or Password did not matched</div>";
 
         header('location:' . SITEURL . 'user_login.php');
+        die("Error: " . mysqli_error($conn));
+
     }
 }
 
