@@ -85,7 +85,7 @@ if (isset($_SESSION['cust-login-success-msg'])) {
                 $price = $rows['price'];
                 $description = $rows['description'];
                 $image_name = $rows['image_name'];
-                $restaurant_id = $rows['Restaurant_ID'];
+                $rest_id = $rows['Restaurant_ID'];
                 ?>
 
                 <div style="margin: 0 auto;">
@@ -107,7 +107,7 @@ if (isset($_SESSION['cust-login-success-msg'])) {
                                 <?php echo $description; ?>
                             </p>
 
-                            <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>&rest_id=<?php echo $restaurant_id ?>"
+                            <a href="<?php echo SITEURL ?>order.php?food-id=<?php echo $id ?>&rest_id=<?php echo $rest_id ?>"
                                 class="btn btn-primary" style="padding: 4px 10px;">Order Now
                             </a>
                         </div>
