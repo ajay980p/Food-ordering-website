@@ -2,76 +2,86 @@
 include 'partials/menu.php';
 ?>
 
-<div class="main-content">
+<div class="container">
 
-    <div class="wrapper">
+    <div class="container">
 
-        <strong>Manage Admin</strong>
-        </br>
-        </br>
+        <div align="center" class="m-5">
+            <h2>Manage Admin</h2>
+        </div>
 
-        <?php 
-            if(isset($_SESSION['add'])) {
-                echo $_SESSION['add'];
-                unset($_SESSION['add']);
-            }
+        <?php
+        if (isset($_SESSION['add'])) {
+            echo $_SESSION['add'];
+            unset($_SESSION['add']);
+        }
 
-            if(isset($_SESSION['user-not-found'])) {
-                echo $_SESSION['user-not-found'];
-                unset($_SESSION['user-not-found']);
-            }
+        if (isset($_SESSION['password-update-success'])) {
+            echo $_SESSION['password-update-success'];
+            unset($_SESSION['password-update-success']);
+        }
+
+        if (isset($_SESSION['update-admin'])) {
+            echo $_SESSION['update-admin'];
+            unset($_SESSION['update-admin']);
+        }
         ?>
 
-        </br>
-        </br>
+        <a href="add-admin.php" class="btn btn-success m-4">Add Admin</a>
 
-        <button class="add-admin"
-            style=" padding: 10px; background-color: #ff4757; border: none; border-radius: 25px; cursor: pointer; color: #ffff"><a
-                href="add-admin.php" style="text-decoration: none; color: #ffff">Add
-                Admin</a></button>
-        </br>
-        </br>
-        <table class="tbl-class">
-            <tr class="tbl-row">
-                <td class="tbl-data">S.No</td>
-                <td class="tbl-data">Full Name</td>
-                <td class="tbl-data">UserName</td>
-                <td class="tbl-data">Actions</td>
-            </tr>
+        <table class="table table-bordered h-100 text-center">
+            <thead>
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
 
-            <?php
+            <tbody>
+                <?php
                 $sql = "SELECT * FROM tbl_admin";
                 $run = mysqli_query($conn, $sql);
 
-                if(mysqli_num_rows($run) > 0) {
+                if (mysqli_num_rows($run) > 0) {
                     $count = 1;
-                    while($row = mysqli_fetch_assoc($run)) {
+                    while ($row = mysqli_fetch_assoc($run)) {
                         $id = $row['id'];
                         $fullName = $row['full_name'];
                         $username = $row['username'];
-                       
-                        echo "<tr>
-                                <td class='tbl-data'>".$count++."</td>
-                                <td class='tbl-data'>$fullName</td>
-                                <td class='tbl-data'>$username</td>
-                                <td class='tbl-data'>
-                                    <button><a href='update-password.php?updatePassword=$id'>update Password</a></button>
-                                    <button><a href='update-admin.php?updateID=$id'>Update</a></button>
-                                    <button><a href='delete-admin.php?deleteID=$id'>Delete</a></button>
-            </td>
-            </tr>";
-            }
-            }
-            ?>
+
+                        ?>
+
+                        <tr>
+                            <th scope="row">
+                                <?php echo $count++ ?>
+                            </th>
+                            <td>
+                                <?php echo $fullName ?>
+                            </td>
+                            <td>
+                                <?php echo $username ?>
+                            </td>
+                            <td>
+                                <?php echo "
+                                    <a href='update-password.php?updatePassword=$id' class='btn btn-success m-4'>Password</a>
+                                    <a href='update-admin.php?updateID=$id' class='btn btn-success m-4'>Update</a>
+                                    <a href='delete-admin.php?deleteID=$id' class='btn btn-danger m-4'>Delete</a>
+                                " ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
+            </tbody>
         </table>
+
     </div>
 
-    <div class="footer">
-        <div class="wrapper">
-            <p class="text-center">2023 All rights reserved to the restaurant</p>
-        </div>
-    </div>
 </div>
-</body>
 
-</html>
+<?php
+include 'partials/footer.php';
+?>

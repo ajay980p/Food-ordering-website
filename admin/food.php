@@ -29,14 +29,8 @@ include 'partials/menu.php';
 
     <br>
 
-    <button class="add-admin"
-        style=" padding: 10px; background-color: #ff4757; border: none; border-radius: 25px; cursor: pointer; color: #ffff; "><a
-            href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary"
-            style="text-decoration: none; color: white;">Add
-            Food</a>
-    </button>
+    <a href="<?php echo SITEURL; ?>admin/add-food.php" class="btn btn-success m-4">Add Food</a>
 
-    <br>
     <br>
 
     <div class="table-responsive mx-auto">

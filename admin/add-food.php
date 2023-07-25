@@ -13,11 +13,12 @@ include 'partials/menu.php';
 
 <body>
 
-    <div style="margin: 50px 20px;">
-        <h2>Add Food</h2>
+    <div class="container-fluid w-50">
 
-        <br>
-        <br>
+        <div class="text-center m-4">
+            <h2>Add Food</h2>
+        </div>
+
 
         <?php
         if (isset($_SESSION['upload'])) {
@@ -25,106 +26,108 @@ include 'partials/menu.php';
             unset($_SESSION['upload']);
         }
         ?>
+        <div class="container">
 
-        <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" for="form6Example1">Title</label>
+                            <input type="text" id="form6Example1" class="form-control" name="title" required
+                                placeholder="Enter Title of the Food" />
+                        </div>
+                    </div>
 
-            <table class="tbl-30">
+                    <div class="form-outline mb-4">
+                        <label class="form-label mt-3" for="form6Example7" type="text">Description</label>
+                        <textarea class="form-control" id="form6Example7" rows="4" name="description"
+                            placeholder="Enter Description"></textarea>
+                    </div>
 
-                <tr>
-                    <td>Title : </td>
-                    <td>
-                        <input type="text" name="title" required />
-                    </td>
-                </tr>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" for="form6Example2">Price : </label>
+                            <input type="number" id="form6Example2" class="form-control" name="price"
+                                placeholder="Enter Price" />
+                        </div>
+                    </div>
+                </div>
 
-                <tr>
-                    <td>Description : </td>
-                    <td>
-                        <textarea name="description" type="text" rows="4" cols="30"
-                            placeholder="Description of the Food" required></textarea>
-                    </td>
-                </tr>
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form6Example3">Select Image :</label>
+                    <input id="form6Example3" class="form-control" name="image" type="file" />
+                </div>
 
-                <tr>
-                    <td>Price :</td>
-                    <td>
-                        <input name="price" type="number" />
-                    </td>
-                </tr>
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form6Example4">Category :</label>
+                    <select id="form6Example4" class="form-control" name="category">
 
-                <tr>
-                    <td>Select Image :</td>
-                    <td>
-                        <input name="image" type="file" />
-                    </td>
-                </tr>
+                        <?php
+                        // Displaying the Categories through the database
+                        
+                        $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
+                        $run = mysqli_query($conn, $sql);
 
-                <tr>
-                    <td>Category :</td>
-                    <td>
-                        <select name="category">
+                        $count = mysqli_num_rows($run);
 
-                            <?php
-                            // Displaying the Categories through the database
-                            
-                            $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
-                            $run = mysqli_query($conn, $sql);
-
-                            $count = mysqli_num_rows($run);
-
-                            if ($count > 0) {
-                                // We have Categories exist
-                            
-                                while ($row = mysqli_fetch_assoc($run)) {
-                                    // Get the value from the database
-                            
-                                    $id = $row['id'];
-                                    $title = $row['title'];
-                                    ?>
-
-                                    <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
-
-                                    <?php
-                                }
-                            } else {
-                                // We do not have categories
+                        if ($count > 0) {
+                            // We have Categories exist
+                        
+                            while ($row = mysqli_fetch_assoc($run)) {
+                                // Get the value from the database
+                        
+                                $id = $row['id'];
+                                $title = $row['title'];
                                 ?>
 
-                                <option value="0">No Categories</option>
+                                <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
 
-                            <?php
+                                <?php
                             }
+                        } else {
+                            // We do not have categories
                             ?>
 
-                        </select>
-                    </td>
-                </tr>
+                            <option value="0">No Categories</option>
 
-                <tr>
-                    <td>Featured :</td>
-                    <td>
-                        <input name="featured" type="radio" value="Yes" />Yes
-                        <input name="featured" type="radio" value="No" />No
-                    </td>
-                </tr>
+                        <?php
+                        }
+                        ?>
 
-                <tr>
-                    <td>Active :</td>
-                    <td>
-                        <input name="active" type="radio" value="Yes" />Yes
-                        <input name="active" type="radio" value="No" />No
-                    </td>
-                </tr>
+                    </select>
+                </div>
 
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" name="submit" value="Add Food">
-                    </td>
-                </tr>
+                <!-- Email input -->
+                <div>
+                    <tr>
+                        <td>Featured :</td>
+                        <td>
+                            <input name="featured" type="radio" value="Yes" />Yes
+                            <input name="featured" type="radio" value="No" />No
+                        </td>
+                    </tr>
+                </div>
 
-            </table>
+                <div>
+                    <tr>
+                        <td>Active :</td>
+                        <td>
+                            <input name="active" type="radio" value="Yes" />Yes
+                            <input name="active" type="radio" value="No" />No
+                        </td>
+                    </tr>
+                </div>
 
-        </form>
+                <!-- Submit button -->
+                <div align="center">
+                    <button type="submit" name="submit" class="btn btn-primary btn-block mb-4 mt-4">Add Food</button>
+                </div>
+            </form>
+
+        </div>
 
         <?php
         // Check whether button is clicked or not
@@ -165,16 +168,18 @@ include 'partials/menu.php';
                     // Image is selected
         
                     // To get the extension of the file
-                    $ext = end(explode('.', $image_name));
+                    $ext_parts = explode('.', $image_name);
+                    $ext = end($ext_parts);
+
                     // explode will do to divide the full name into parts
                     // So using end will get the last part of the word
         
                     $image_name = "Food-name" . rand(0, 9999) . "." . $ext;
                     // New image name will be like "Food-name-657.jpg";
         
-                    $src = $_FILES['image']['tmp_name'];
 
                     // Destination path for the image to be updated
+                    $src = $_FILES['image']['tmp_name'];
                     $dst = "C://xampp//htdocs//food//images//food//" . $image_name;
 
                     $upload = move_uploaded_file($src, $dst);
@@ -211,11 +216,24 @@ include 'partials/menu.php';
             if ($run2 == true) {
                 // Data inserted successfully
                 $_SESSION['add'] = "<div class='success'>Food added Successfully...</div>";
-                header('location:' . SITEURL . 'admin/food.php');
+
+                ?>
+
+                <script>
+                    window.location.href = "http://localhost/food/admin/food.php";
+                </script>
+
+                <?php
             } else {
                 // Failed to insert the data
                 $_SESSION['add'] = "<div class='success'>Failed to add Food...</div>";
-                header('location:' . SITEURL . 'admin/food.php');
+
+                ?>
+                <script>
+                    window.location.href = "http://localhost/food/admin/food.php";
+                </script>
+                <?php
+
             }
         }
         ?>

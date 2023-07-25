@@ -1,10 +1,11 @@
 <?php include('partials/menu.php') ?>
 
-<div class="main-content">
-    <div class="wrapper">
-        <h1>Update Admin</h1>
+<div class="container mt-4 h-75">
+    <div class="w-50 mx-auto">
 
-        </br>
+        <div align="center">
+            <h1>Update Admin</h1>
+        </div>
 
         <?php
         $id = $_GET['updateID'];
@@ -19,19 +20,25 @@
         ?>
 
         <form action="" method="POST">
-            <label>Full Name :</label>
-            <input type="text" name="full_name" value="<?php echo $full_name; ?>" />
 
-            </br>
-            </br>
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form4Example1">Full Name</label>
+                <input name="full_name" type="text" value="<?php echo $full_name; ?>" id="form4Example1"
+                    class="form-control" />
+            </div>
 
-            <label>Username :</label>
-            <input type="text" name="username" value="<?php echo $username; ?>" />
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form4Example2">UserName</label>
+                <input type="text" name="username" value="<?php echo $username; ?>" id="form4Example2"
+                    class="form-control" />
+            </div>
 
-            </br>
-            </br>
-
-            <button type="submit" name="submit">Update</button>
+            <!-- Submit button -->
+            <div class="w-50">
+                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4 mx-auto">Update</button>
+            </div>
         </form>
     </div>
 </div>
@@ -46,9 +53,27 @@ if (isset($_POST['submit'])) {
     $run = mysqli_query($conn, $sql);
 
     if ($run) {
-        echo "Success";
+        $_SESSION['update-admin'] = "<div align='center' class='text-success'>Admin Details Updated Successfully</div> <br>";
+
+        // Redirecting page to Manage Admin
+        ?>
+
+        <script>
+            window.location.href = "http://localhost/food/admin/manage-admin.php";
+        </script>
+
+        <?php
+
     } else {
-        echo "Unsuccess";
+        $_SESSION['update-admin'] = "<div align='center' class='text-success'>Failed to Update Admin Details</div> <br>";
+        // Redirecting page to Manage Admin
+        ?>
+
+        <script>
+            window.location.href = "http://localhost/food/admin/manage-admin.php";
+        </script>
+
+        <?php
     }
 }
 ?>

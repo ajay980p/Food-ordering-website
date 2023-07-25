@@ -2,9 +2,12 @@
 include('partials/menu.php');
 ?>
 
-<div class="main-content">
-    <div class="wrapper">
-        <h1>Add Admin</h1>
+<div class="container mt-4 h-75">
+    <div class="w-50 mx-auto">
+
+        <div align="center">
+            <h1>Add Admin</h1>
+        </div>
 
         <?php
         if (isset($_SESSION['add'])) {
@@ -13,45 +16,35 @@ include('partials/menu.php');
         }
         ?>
 
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+        <form method="POST">
 
-            <table>
-                <tr>
-                    <td>Full Name</td>
-                    </br>
-                    </br>
-                    <td>
-                        <input name="full_name" type="text" placeholder="Enter your Name" />
-                    </td>
-                </tr>
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form4Example1">Full Name</label>
+                <input name="full_name" type="text" placeholder="Enter your Name" id="form4Example1"
+                    class="form-control" />
+            </div>
 
-                </br>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form4Example2">UserName</label>
+                <input name="username" type="text" placeholder="Enter your username" id="form4Example2"
+                    class="form-control" />
+            </div>
 
-                <tr>
-                    <td>username</td>
-                    <td>
-                        <input name="username" type="text" placeholder="Enter your username" />
-                    </td>
-                </tr>
+            <!-- Message input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form4Example3">Password</label>
+                <input name="password" type="password" placeholder="Enter your Password" id="form4Example2"
+                    class="form-control" />
+            </div>
 
-                </br>
-
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <input name="password" type="password" placeholder="Enter your Password" />
-                    </td>
-                </tr>
-
-                </br>
-
-                <tr>
-                    <td>
-                        <input type="submit" name="submit" value="Add Admin" />
-                    </td>
-                </tr>
-            </table>
+            <!-- Submit button -->
+            <div class="w-50">
+                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4 mx-auto">Add Admin</button>
+            </div>
         </form>
+
     </div>
 </div>
 
@@ -79,14 +72,19 @@ if (isset($_POST['submit'])) {
     $run = mysqli_query($conn, $sql);
 
     if ($run) {
-        $_SESSION['add'] = "Admin added Successfully";
+        $_SESSION['add'] = "<div align='center' class='text-success'>Admin added Successfully</div> <br>";
 
         // Redirecting page to Manage Admin
-        header("location:" . SITEURL . 'admin/manage-admin.php');
+        ?>
 
+        <script>
+            window.location.href = "http://localhost/food/admin/manage-admin.php";
+        </script>
+
+        <?php
 
     } else {
-        $_SESSION['add'] = "Failed to add Admin";
+        $_SESSION['add'] = "<div align='center' class='text-success'>Failed to add Admin</div> <br>";
 
         // Redirecting page to Manage Admin
         header("location:" . SITEURL . 'admin/add-admin.php');
