@@ -11,6 +11,14 @@ include 'partials_front/menu.php';
         <div style="display:flex; flex-wrap: wrap;" class="">
 
             <?php
+
+            $cust_id = $_SESSION['cust-id'];
+            $sql = "SELECT * FROM tbl_customer WHERE cust_id = $cust_id";
+            $run = mysqli_query($conn, $sql);
+            $rows = mysqli_fetch_assoc($run);
+            $total_amount = $rows['total_trans'];
+            $discounted = 0;
+
             // Getting food from the database usig SQL Query
             
             $sql1 = "SELECT * FROM tbl_food WHERE active='Yes'";
@@ -23,6 +31,19 @@ include 'partials_front/menu.php';
                 $description = $rows['description'];
                 $image_name = $rows['image_name'];
                 $rest_id = $rows['Restaurant_ID'];
+
+                if ($total_amount > 2000) {
+                    $discounted = $price * 0.60;
+                } else if ($total_amount > 1500) {
+                    $discounted = $price * 0.80;
+                } else if ($total_amount > 1000) {
+                    $discounted = $price * 0.90;
+                } else if ($total_amount > 500) {
+                    $discounted = $price * 0.75;
+                } else {
+                    $discounted = $price * 0.70;
+                }
+
                 ?>
 
                 <div style="margin: 0 auto;">
@@ -37,9 +58,17 @@ include 'partials_front/menu.php';
                             <h4>
                                 <?php echo $title; ?>
                             </h4>
+
                             <p class="food-price">
-                                <?php echo '$' . $price; ?>
+                                <?php echo '&#8377' ?>
+                                <s>
+                                    <?php echo $price; ?>
+                                </s>
+                                <b>
+                                    <?php echo $discounted; ?>
+                                </b>
                             </p>
+
                             <p class="food-detail">
                                 <?php echo $description; ?>
                             </p>

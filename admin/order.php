@@ -34,10 +34,11 @@
                     <th scope="col">Qty</th>
                     <th scope="col">Price</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">After Discount</th>
                     <th scope="col">Order date</th>
                     <th scope="col">Status</th>
                     <th scope="col">Customer Name</th>
+                    <th scope="col">Customer ID</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
@@ -61,6 +62,7 @@
                         $order_date = $rows['order_date'];
                         $status = $rows['status'];
                         $cust_name = $rows['customer_name'];
+                        $cust_id = $rows['cust_id'];
                         $cust_contact = $rows['customer_contact'];
                         $cust_email = $rows['customer_email'];
                         $cust_address = $rows['customer_adress'];
@@ -92,6 +94,9 @@
                             </td>
                             <td>
                                 <?php echo $cust_name ?>
+                            </td>
+                            <td>
+                                <?php echo $cust_id ?>
                             </td>
                             <td>
                                 <?php echo $cust_contact ?>

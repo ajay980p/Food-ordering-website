@@ -20,6 +20,27 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
         header('location:' . SITEURL);
         exit; // Exit to prevent further execution
     }
+
+    // For discount it is used
+    $cust_id = $_SESSION['cust-id'];
+    $sql1 = "SELECT * FROM tbl_customer WHERE cust_id = $cust_id";
+    $run1 = mysqli_query($conn, $sql1);
+    $rows1 = mysqli_fetch_assoc($run1);
+    $total_amount = $rows1['total_trans'];
+    $discounted = 0;
+
+    if ($total_amount > 2000) {
+        $discounted = $price * 0.60;
+    } else if ($total_amount > 1500) {
+        $discounted = $price * 0.80;
+    } else if ($total_amount > 1000) {
+        $discounted = $price * 0.90;
+    } else if ($total_amount > 500) {
+        $discounted = $price * 0.75;
+    } else {
+        $discounted = $price * 0.70;
+    }
+
 } else {
     header('location:' . SITEURL);
     exit; // Exit to prevent further execution
@@ -51,9 +72,15 @@ if (isset($_GET['food-id']) && is_numeric($_GET['food-id'])) {
                         <input name='food_name' type='hidden' value="<?php echo $title ?>" />
 
                         <p class="food-price">
-                            Price :
-                            <?php echo '$' . $price ?>
+                            <?php echo '&#8377' ?>
+                            <s>
+                                <?php echo $price; ?>
+                            </s>
+                            <b>
+                                <?php echo $discounted; ?>
+                            </b>
                         </p>
+
                         <input name='price' type='hidden' value="<?php echo $price ?>" />
 
                         <p class="food-price">
@@ -122,6 +149,18 @@ if (isset($_POST['submit'])) {
 
     $total = $price * $qty; // Total Amount
 
+    if ($total_amount > 2000) {
+        $discounted = $total * 0.60;
+    } else if ($total_amount > 1500) {
+        $discounted = $total * 0.80;
+    } else if ($total_amount > 1000) {
+        $discounted = $total * 0.90;
+    } else if ($total_amount > 500) {
+        $discounted = $total * 0.75;
+    } else {
+        $discounted = $total * 0.70;
+    }
+
     $order_date = date("Y-m-d h:i:sa");
     // $rest_id = $_GET['rest_id'];
     $status = "ordered"; // Ordered, OnDelivery, Delivered, Cancelled
@@ -136,7 +175,7 @@ if (isset($_POST['submit'])) {
                 cust_id = $cust_id,
                 restaurant_id = $rest_id,
                 food = '$food_name',
-                price = $price,
+                price = $discounted,
                 qty = $qty,
                 total = $total,
                 order_date = '$order_date',
@@ -149,6 +188,18 @@ if (isset($_POST['submit'])) {
 
     // Execute the Query
     $run2 = mysqli_query($conn, $sql2);
+
+    $sql3 = "SELECT * from tbl_customer WHERE cust_id = $cust_id";
+    $run3 = mysqli_query($conn, $sql3);
+    $row3 = mysqli_fetch_assoc($run3);
+
+    $cust_total = $row3['total_trans'];
+    $cust_total = $cust_total + $total;
+
+    $sql4 = "UPDATE tbl_customer SET
+    total_trans = $cust_total
+    WHERE cust_id = $cust_id";
+    $run4 = mysqli_query($conn, $sql4);
 
     if ($run2 == true) {
         // Query executed

@@ -51,6 +51,57 @@ include('db/connect.php');
         </form>
     </div>
 
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-4">
+
+                <form method="POST">
+
+                    <div class='row'>
+                        <div class='col'>
+                            <h1 style="text-align: center">User Login</h1>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='col'>
+                            <h4 style="text-align: center" class="text-danger">
+                                <?php
+                                if (isset($_SESSION['login'])) {
+                                    echo $_SESSION['login'];
+                                    unset($_SESSION['login']);
+                                }
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" name="username" aria-describedby="emailHelp"
+                            placeholder="Enter Username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                            placeholder="Password">
+                    </div>
+
+                    <br>
+
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 me-2">Don't have an account? <a class='text-primary' style="cursor: pointer;"
+                                href="cust-signup.php">Create new</a></p>
+                        <!-- <button type="button" class="btn btn-outline-success">Create new</button> -->
+                    </div>
+
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+
 </body>
 
 </html>

@@ -97,6 +97,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['cust-login-success-msg'] = "<div class='success'>Login Successfully</div>";
 
         $_SESSION['cust-login'] = $username;
+        $_SESSION['cust-id'] = $cust_id;
 
         header('Location: ' . SITEURL . 'index.php?cust_id=' . $cust_id);
 

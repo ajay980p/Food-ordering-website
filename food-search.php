@@ -18,12 +18,17 @@ $search = $_POST['search'];
         <div style="display:flex; flex-wrap: wrap;">
             <?php
             $search = $_POST['search'];
-
             $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%search%'";
-
             $run = mysqli_query($conn, $sql);
-
             $count = mysqli_num_rows($run);
+
+            // For discount it is used
+            $cust_id = $_SESSION['cust-id'];
+            $sql1 = "SELECT * FROM tbl_customer WHERE cust_id = $cust_id";
+            $run1 = mysqli_query($conn, $sql1);
+            $rows1 = mysqli_fetch_assoc($run1);
+            $total_amount = $rows1['total_trans'];
+            $discounted = 0;
 
             if ($count > 0) {
                 while ($rows = mysqli_fetch_assoc($run)) {
@@ -33,6 +38,18 @@ $search = $_POST['search'];
                     $description = $rows['description'];
                     $image_name = $rows['image_name'];
                     $rest_id = $rows['Restaurant_ID'];
+
+                    if ($total_amount > 2000) {
+                        $discounted = $price * 0.60;
+                    } else if ($total_amount > 1500) {
+                        $discounted = $price * 0.80;
+                    } else if ($total_amount > 1000) {
+                        $discounted = $price * 0.90;
+                    } else if ($total_amount > 500) {
+                        $discounted = $price * 0.75;
+                    } else {
+                        $discounted = $price * 0.70;
+                    }
                     ?>
 
                     <div style="margin: 0 auto;">
@@ -47,9 +64,17 @@ $search = $_POST['search'];
                                 <h4>
                                     <?php echo $title; ?>
                                 </h4>
+
                                 <p class="food-price">
-                                    <?php echo '$' . $price; ?>
+                                    <?php echo '&#8377' ?>
+                                    <s>
+                                        <?php echo $price; ?>
+                                    </s>
+                                    <b>
+                                        <?php echo $discounted; ?>
+                                    </b>
                                 </p>
+
                                 <p class="food-detail">
                                     <?php echo $description; ?>
                                 </p>

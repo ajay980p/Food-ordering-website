@@ -7,7 +7,7 @@ include 'partials/menu.php';
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="text-center">Add Food</h3>
+                <h3 class="text-center">Ordered Foods</h3>
             </div>
         </div>
     </div>
