@@ -30,7 +30,6 @@ include('login-check.php');
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                    <a class="nav-link" href="manage-admin.php">Admin</a>
                     <a class="nav-link" href="category.php">Category</a>
                     <a class="nav-link" href=" food.php">Food</a>
                     <a class="nav-link" href="order.php">Order</a>

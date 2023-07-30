@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="text-center">Order</h3>
+                <h3 class="text-center">Ordered Food</h3>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     <th scope="col">S.No</th>
                     <th scope="col">Food</th>
                     <th scope="col">Qty</th>
-                    <th scope="col">Price</th>
+                    <!-- <th scope="col">Price</th> -->
                     <th scope="col">Total</th>
                     <th scope="col">After Discount</th>
                     <th scope="col">Order date</th>
@@ -76,9 +76,6 @@
                             </td>
                             <td>
                                 <?php echo $qty ?>
-                            </td>
-                            <td>
-                                <?php echo $price ?>
                             </td>
                             <td>
                                 <?php echo $total ?>

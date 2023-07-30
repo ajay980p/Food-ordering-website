@@ -54,17 +54,6 @@ include './admin/db/connect.php';
                                             </div>
                                         </div>
 
-                                        <!-- <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="form3Example4cd">Confirm your
-                                                    password</label>
-                                                <input type="password" id="form3Example4cd" class="form-control"
-                                                    placeholder="Confirm Password" name="confirmPass" required />
-                                                <div class="invalid-feedback">Passwords do not match.</div>
-                                            </div>
-                                        </div> -->
-
                                         <div class="form-check d-flex justify-content-center mb-3">
                                             <label class="form-check-label" for="form2Example3">
                                                 Already have an Account? <a href="user_login.php">Login</a>
@@ -72,7 +61,7 @@ include './admin/db/connect.php';
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg"
+                                            <button type="submit" class="btn btn-primary"
                                                 name="submit">Register</button>
                                         </div>
 
@@ -96,8 +85,9 @@ include './admin/db/connect.php';
         $username = $_POST['username'];
         $password = $_POST['password'];
         $cust_id = rand(1000, 9999);
+        $total_trans = 0;
 
-        $sql = "INSERT INTO tbl_customer(cust_id, username, name, password) VALUES ($cust_id, '$username', '$name', '$password')";
+        $sql = "INSERT INTO tbl_customer(cust_id, username, name, password, total_trans) VALUES ($cust_id, '$username', '$name', '$password', $total_trans)";
 
         $run = mysqli_query($conn, $sql);
 

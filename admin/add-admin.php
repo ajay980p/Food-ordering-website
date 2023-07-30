@@ -1,54 +1,68 @@
 <?php
-include('partials/menu.php');
+include './db/connect.php';
 ?>
 
-<div class="container mt-4 h-75">
-    <div class="w-50 mx-auto">
+<!DOCTYPE html>
+<html lang="en">
 
-        <div align="center">
-            <h1>Add Admin</h1>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="admin.css" rel="stylesheet">
+    <title>Food Order Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-4">
+
+                <form method="POST" action="">
+
+                    <div class='row'>
+                        <div class='col'>
+                            <h1 style="text-align: center">Restaurant Signup</h1>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">Restaurant Name</label>
+                        <input type="text" class="form-control" name="full_name" aria-describedby="emailHelp"
+                            placeholder="Enter Restaurant Name">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">UserName</label>
+                        <input type="username" class="form-control" name="username" aria-describedby="emailHelp"
+                            placeholder="Enter Username Name">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="password" class="form-control" name="password" aria-describedby="emailHelp"
+                            placeholder="Enter Password">
+                    </div>
+
+                    <div class="form-check d-flex justify-content-center mb-3">
+                        <label class="form-check-label" for="form2Example3">
+                            Already have an Account? <a href="login.php">Login</a>
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary" name="submit">Register</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <?php
-        if (isset($_SESSION['add'])) {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']); // Removing the session msg
-        }
-        ?>
-
-        <form method="POST">
-
-            <!-- Name input -->
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form4Example1">Full Name</label>
-                <input name="full_name" type="text" placeholder="Enter your Name" id="form4Example1"
-                    class="form-control" />
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form4Example2">UserName</label>
-                <input name="username" type="text" placeholder="Enter your username" id="form4Example2"
-                    class="form-control" />
-            </div>
-
-            <!-- Message input -->
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form4Example3">Password</label>
-                <input name="password" type="password" placeholder="Enter your Password" id="form4Example2"
-                    class="form-control" />
-            </div>
-
-            <!-- Submit button -->
-            <div class="w-50">
-                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4 mx-auto">Add Admin</button>
-            </div>
-        </form>
-
     </div>
-</div>
-
-<?php include('partials/footer.php') ?>
+</body>
 
 <?php
 
@@ -78,7 +92,7 @@ if (isset($_POST['submit'])) {
         ?>
 
         <script>
-            window.location.href = "http://localhost/food/admin/manage-admin.php";
+            window.location.href = "http://localhost/food/admin/login.php";
         </script>
 
         <?php
@@ -87,7 +101,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['add'] = "<div align='center' class='text-success'>Failed to add Admin</div> <br>";
 
         // Redirecting page to Manage Admin
-        header("location:" . SITEURL . 'admin/add-admin.php');
+        header("location:" . SITEURL . 'admin/login.php');
     }
 }
 ?>

@@ -9,48 +9,15 @@ include('db/connect.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
     <title>Login</title>
 </head>
 
 <body>
-    <div class='loginDiv'>
-
-        <form method="POST" class="form">
-            <h1 style="text-align: center">LOGIN</h1>
-
-            <br>
-            <br>
-
-            <?php
-            if (isset($_SESSION['login'])) {
-                echo $_SESSION['login'];
-                unset($_SESSION['login']);
-                echo "<br><br>";
-            }
-
-            if (isset($_SESSION['no-login-message'])) {
-                echo $_SESSION['no-login-message'];
-                unset($_SESSION['no-login-message']);
-                echo "<br><br>";
-            }
-            ?>
-
-            <label>Username</label>
-            <input name='username' type='text' />
-
-            <br>
-            <br>
-
-            <label>Password</label>
-            <input name='password' type='password' />
-
-            <br>
-            <br>
-
-            <button type='submit' name='submit'>Login</button>
-        </form>
-    </div>
-
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-4">
@@ -59,7 +26,7 @@ include('db/connect.php');
 
                     <div class='row'>
                         <div class='col'>
-                            <h1 style="text-align: center">User Login</h1>
+                            <h1 style="text-align: center">Restaurant Login</h1>
                         </div>
                     </div>
 
@@ -92,16 +59,18 @@ include('db/connect.php');
 
                     <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Don't have an account? <a class='text-primary' style="cursor: pointer;"
-                                href="cust-signup.php">Create new</a></p>
+                                href="add-admin.php">Create new</a></p>
                         <!-- <button type="button" class="btn btn-outline-success">Create new</button> -->
                     </div>
 
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                </form>
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                    </div>
 
+                </form>
             </div>
         </div>
-
+    </div>
 </body>
 
 </html>
