@@ -3,6 +3,7 @@ include './admin/db/connect.php';
 ?>
 
 <?php
+
 // Adding Authorization
 if (!isset($_SESSION['cust-login'])) {
     header('location:' . SITEURL . 'user_login.php');
